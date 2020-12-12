@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>{{instance.title}}</title>
+</head>
+<body>
+	{% if messages %}
+	<ul class='messages'>
+		{% for message in messages %}
+		    {{message|safe}}
+		<li {% if message.tags %} class='{{message.tags}}' {% endif %}>   
+			{% if 'html_safe' in message.tags %}
+			We have tag 'html_safe'
+			{% else %}
+			{{message}}
+			{% endif %} 
+		</li>	
+		{% endfor %}
+	{% endif %}
+<h1>{{instance.title}}</h1>
+	<div>
+		<p>{{instance.content}}</p>
+		<p>{{instance.post_author}}</p>
+		<p>Создан: {{instance.timestamp}}. Изменён: {{instance.update}}</p>
+		<p>{{instance.post_likes}}</p>
+	</div>
+
+
+</body>
+</html>

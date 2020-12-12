@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>{{title}}</title>
+</head>
+<body>
+	{% if messages %}
+	<ul class='messages'>
+		{% for message in messages %}
+		    {{message|safe}}
+		<li {% if message.tags %} class='{{message.tags}}' {% endif %}>   
+			{% if 'html_safe' in message.tags %}
+			We have tag 'html_safe'
+			{% else %}
+			{{message}}
+			{% endif %} 
+		</li>	
+		{% endfor %}
+	{% endif %}
+<h1>{{instance.idCourse}} {{instance.nameCourse}}</h1>
+	<div>
+		<p>{{instance.content}}</p>
+		<p>{{instance.post_author}}</p>
+		<h2><p>{{instance.nameUnivercity}}</p></h2>
+		<p>{{instance.descriptionCourse}}</p>
+		<p><a href="{{instance.urlCourse}}" target="_blank">{{instance.urlCourse}}</a></p>
+		<p>Дата получения информации: {{instance.timestamp}}</p>
+	</div>
+	
+	<form method="POST" action="course_delete/"> {% csrf_token %}
+	<p> При нажатии кнопки курс будет удалён из базы данных</p>
+	<input type='submit' value='УДАЛИТЬ КУРС' name=''>
+	</form>
+	<p></p> 
+	<form method="POST" action="/courses/find_result/"> {% csrf_token %}
+	<input type='submit' value='Вернуться к списку' name=''>
+	</form>
+	
+
+</body>
+</html>
